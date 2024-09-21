@@ -148,7 +148,7 @@ function hideModal(event) {
 
 async function renderCartButtons() {
     const cartArray = await fetch('./data.json').then(response => response.json());
-    
+
     cartArray.forEach((item, i) => {
         const cartCount = shoppingCart.getCountForItem(item.name);
         const cartTemplate = cartCount !== 0
