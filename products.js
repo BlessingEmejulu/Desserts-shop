@@ -1,39 +1,37 @@
 const app = document.querySelector('#products');
+
+// Function to create a product template
+const createProductTemplate = (product, id) => `
+<section name="product_info">
+  <div class="picture">
+    <picture>
+      <source media="(min-width:725px)" srcset="${product.image.desktop}">
+      <source media="(min-width:525px)" srcset="${product.image.tablet}">
+      <img src="${product.image.mobile}" alt="${product.category}" />
+      <div id="div_${id}" class="add-cart" data-name="${product.name}" data-price="${product.price}" data-category="${product.image.thumbnail}">
+      </div>
+    </picture>
+  </div>
+  <div class="card">
+    <header class="card__header">${product.category}</header>
+    <p class="card__description">${product.name}</p>
+    <p class="card__price">${product.price.toFixed(2)}</p>
+  </div>
+</section>`;
+
+// Function to append HTML content to the app
+const appendTemplateToDOM = (template) => {
+  const range = document.createRange();
+  range.selectNode(app);
+  const fragment = range.createContextualFragment(template);
+  app.appendChild(fragment);
+};
+
+// Fetch and render product data
 fetch('./data.json')
   .then(response => response.json())
   .then(data => {
-    // convert the data to html template
-    const template = data.map((prdct, id) => 
-`<section name="product_info">
-    <div class="picture">
-        <picture>
-            <source media="(min-width:725px)" srcset="${prdct.image.desktop}">
-            <source media="(min-width:525px)" srcset="${prdct.image.tablet}">
-            <img src="${prdct.image.mobile}" alt="${prdct.category}" />
-
-            <div id="div_${id}" class="add-cart" data-name="${prdct.name}" data-price="${prdct.price}" data-category="${prdct.image.thumbnail}">
-                
-            </div>
-        </picture>
-    </div>
-
-    <div class="card">
-        <header class="card__header">${prdct.category}</header>
-        <p class="card__description">${prdct.name}</p>
-        <p class="card__price">${(prdct.price).toFixed(2)}</p>
-    </div>
-</section>`
-    ).join('');
-    // create a virtual container
-    const range = document.createRange();
-    // give it a context
-    range.selectNode(app);
-    // add the html, this converts the html into a collection of elements
-    const fragment = range.createContextualFragment(template);
-    // append the elements to the document
-    app.appendChild(fragment);
-  });
-
-
-
-  
+    const template = data.map(createProductTemplate).join('');
+    appendTemplateToDOM(template);
+  })
+  .catch(error => console.error('Error fetching product data:', error));
