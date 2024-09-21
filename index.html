@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <title>Desserts Shop</title>
+  </head>
+<body>
+  <header>
+    <h1>Desserts</h1>
+  </header>
+
+  <main id="products">
+    <!-- products.js creates a template & fills content here from data.json -->
+  </main>
+
+  <aside class="cart">
+    <div class="cart__items">
+      <header>Your Cart (<span id="cart__quantity">0</span>)</header>
+      <div id="cart_items">
+        <!--Your added items will appear here -->
+      </div>
+
+      <div id="cart__empty" class="cart__empty">
+        <img src="./assets/images/illustration-empty-cart.svg" />
+        <p>Your added items will appear here</p>
+      </div>
+
+      <div class="cart__total" id="cart__total">
+        <p>Order Total</p>
+        <p id="cart__price" class="cart__price"></p>
+      </div>
+
+      <p class="cart__info" id="cart__info">
+        <img src="./assets/images/icon-carbon-neutral.svg" alt="" />
+        This is a&nbsp;<strong>carbon-neutral</strong>&nbsp;delivery
+      </p>
+      <button id="cart__confirm" onClick="displayOrder()">Confirm Order</button>
+    </div>
+  </aside>
+
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+    Coded by <a href="#">Jared Elliott</a>.
+  </footer>
+
+
+  <section id="modal" class="hidden" onClick="hideModal(event)">
+    <div class="confirm">
+      <header>
+        <img src="./assets/images/icon-order-confirmed.svg" />
+        <h1>Order Confirmed</h1>
+        <p class="subtext">We hope you enjoy your food!</p>
+      </header>
+
+  
+      <div id="confirm__items" class="confirm__items">
+        <!--Your added items will appear here -->
+      </div>
+      <br />
+      <button id="new_order" onClick="clearCart()">Start New Order</button>
+    </div>
+  </section>
+
+<script defer src="./products.js"> /* Javascript to create products from .json data */ </script>
+<script defer src="./cart.js"> /* Javascript for cart functionality */</script>
+ 
+</html>
